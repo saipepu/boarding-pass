@@ -11,12 +11,17 @@ import LogForm from "../(flightlog)/LogForm";
 const flightLogService = new FlightLogService();
 
 export default function Home() {
+
   const [logs, setLogs] = useState<FlightLog[]>([]);
 
   const handleAddLog = useCallback(
     (log: FlightLog) => {
-      console.log(log)
-      setLogs([...logs, log]);
+      const existed = logs.filter((item: FlightLog) => item.passengerName == log.passengerName)
+      if(log.type === 'arrival' && existed.length%2 == 0) {
+        window.alert("Cannot find this passenger in the Departure Log. Please double check the passenger name?")
+      } else {
+        setLogs([...logs, log]);
+      }
     },
     [logs]
   );
