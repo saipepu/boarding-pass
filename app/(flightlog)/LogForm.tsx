@@ -27,7 +27,7 @@ function LogForm(props: any) {
     <div className="w-full flex flex-col justify-start items-start gap-2">
 
       <div className="w-full flex flex-col justify-start items-start gap-2">
-        <label htmlFor="passengerName">
+        <label className="font-bold" htmlFor="passengerName">
           Passenger Name:
         </label>
         <input
@@ -40,7 +40,7 @@ function LogForm(props: any) {
         />
       </div>
       <div className="w-full flex flex-col justify-start items-start gap-2">
-        <label htmlFor="airport">
+        <label className="font-bold" htmlFor="airport">
           Airport:
         </label>
         <input
@@ -53,7 +53,7 @@ function LogForm(props: any) {
         />
       </div>
       <div className="w-full flex flex-col justify-start items-start gap-2">
-        <label htmlFor="airport">
+        <label className="font-bold" htmlFor="airport">
           Timestamp:
         </label>
         <input
