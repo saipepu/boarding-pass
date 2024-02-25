@@ -15,8 +15,8 @@ export default function Home() {
 
   const handleAddLog = useCallback(
     (log: FlightLog) => {
-      logs.push(log);
-      setLogs(logs);
+      console.log(log)
+      setLogs([...logs, log]);
     },
     [logs]
   );
@@ -56,7 +56,7 @@ export default function Home() {
         </div>
         <div className={styles.card} style={{ margin: 16, width: "100%" }}>
           <h2>Flight Logs</h2>
-          <LogCard style={{ width: "100%" }} data={logs}></LogCard>
+          <LogCard data={logs}></LogCard>
         </div>
         {/* Render boarding pass here */}
         {/* {[].map((_, i) => ( */}
