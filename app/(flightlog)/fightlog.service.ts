@@ -1,5 +1,12 @@
+export interface FlightLog {
+  passengerName: string,
+  airport: string,
+  timestamp: number,
+  type: string,
+}
+
 export class FlightLogService {
-  initialData = [
+  initialData: FlightLog[] = [
     {
       passengerName: "cherprang",
       airport: "bangkok",
@@ -21,10 +28,13 @@ export class FlightLogService {
   ];
 
   getLogs() {
-    return new Promise(function (resolve) {
-      setTimeout(function () {
+    // Changed pure functions to arrow functions to preserve 'this' keyword
+    // Explaination -> When using a regular function as a callback, the context of this changes. 
+    return new Promise((resolve) => {
+      setTimeout(() => {
         resolve(this.initialData || []);
       }, 2000);
     });
   }
+
 }
