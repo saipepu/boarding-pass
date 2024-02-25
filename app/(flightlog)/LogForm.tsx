@@ -6,7 +6,7 @@ const emptyForm = {
   timestamp: "",
 };
 
-function LogForm(props) {
+function LogForm(props: any) {
   const { type, onSubmit } = props;
 
   const [formData, setFormData] = useState(emptyForm);
@@ -16,7 +16,7 @@ function LogForm(props) {
     setFormData(emptyForm);
   }, [formData, type, onSubmit]);
 
-  const handleChange = useCallback(({ target }) => {
+  const handleChange = useCallback(({ target }: any) => {
     setFormData((prev) => ({
       ...prev,
       [target.id]: target.value,
@@ -24,25 +24,23 @@ function LogForm(props) {
   }, []);
 
   return (
-    <div style={{ display: "flex", columnGap: 8 }}>
-      <div
-        style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
-      >
-        <label htmlFor="pname" style={{ fontWeight: "bold" }}>
+    <div className="w-full flex flex-col justify-start items-start gap-2">
+
+      <div className="w-full flex flex-col justify-start items-start gap-2">
+        <label htmlFor="passengerName">
           Passenger Name:
         </label>
         <input
           type="text"
-          id="pname"
-          name="pname"
+          id="passengerName"
+          name="passengerName"
           value={formData.passengerName}
           onChange={handleChange}
+          className="w-full border-[1px] border-[#eaeaea] rounded-md focus:outline-[1px] focus:outline-slate-300 px-3 py-1"
         />
       </div>
-      <div
-        style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
-      >
-        <label htmlFor="airport" style={{ fontWeight: "bold" }}>
+      <div className="w-full flex flex-col justify-start items-start gap-2">
+        <label htmlFor="airport">
           Airport:
         </label>
         <input
@@ -51,24 +49,28 @@ function LogForm(props) {
           name="airport"
           value={formData.airport}
           onChange={handleChange}
+          className="w-full border-[1px] border-[#eaeaea] rounded-md focus:outline-[1px] focus:outline-slate-300 px-3 py-1"
         />
       </div>
-      <div
-        style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
-      >
-        <label htmlFor="timestamp" style={{ fontWeight: "bold" }}>
+      <div className="w-full flex flex-col justify-start items-start gap-2">
+        <label htmlFor="airport">
           Timestamp:
         </label>
         <input
-          type="text"
+          type="number"
           id="timestamp"
           name="timestamp"
           value={formData.timestamp}
           onChange={handleChange}
+          className="w-full border-[1px] border-[#eaeaea] rounded-md focus:outline-[1px] focus:outline-slate-300 px-3 py-1"
         />
       </div>
-      <div style={{ flex: 1, display: "flex", alignItems: "flex-end" }}>
-        <button onClick={handleSubmit}>Submit</button>
+
+      <div className="w-full max-w-[150px]">
+        <button
+          onClick={handleSubmit}
+          className="px-4 py-2 rounded-lg bg-slate-300 text-white font-medium hover:bg-slate-500"
+        >Submit</button>
       </div>
     </div>
   );
