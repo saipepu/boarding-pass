@@ -17,8 +17,20 @@ export default function Home() {
   const handleAddLog = useCallback(
     (log: FlightLog) => {
       const existed = logs.filter((item: FlightLog) => item.passengerName == log.passengerName)
+
       if(log.type === 'arrival' && existed.length%2 == 0) {
-        window.alert("Cannot find this passenger in the Departure Log. Please double check the passenger name?")
+
+        // If the passenger name is not in the departure list.
+        // Alert the user and don't update the Flight Logs
+        // If the passenger is in the departure list and has already landed.
+        window.alert("Cannot find this passenger in the Departure Log or this passenger has already landed.")
+        
+      } else if(log.type === 'departure' && existed.length%2 == 1) {
+
+        // If the passenger name is in the departure list and not landed yet,
+        // Alert the user and don't update the Flight Logs
+        window.alert("This passenger has already departed and not landed yet.")
+
       } else {
         setLogs([...logs, log]);
       }
