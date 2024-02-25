@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import LogItem from "./LogItem";
 import { FlightLog } from "./fightlog.service";
 
-function LogCard(props) {
+interface LogCardProps {
+  data: FlightLog[]
+}
+
+function LogCard(props: LogCardProps) {
   const { data } = props;
   const [logs, setLogs] = useState(data);
 
