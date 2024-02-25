@@ -36,31 +36,27 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next Airline!</a>
         </h1>
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>app/(home)/page.tsx</code>
-        </p>
+        <div className="w-full flex flex-row justify-between items-start gap-8">
+          <div className="w-full rounded-lg p-8 border-[1px] border-[#eaeaea]">
+            <h2 className="text-2xl font-bold mb-4">Departure Logging</h2>
+            <LogForm
+              data={logs}
+              type={"departure"}
+              onSubmit={handleAddLog}
+            ></LogForm>
+          </div>
+          <div className="w-full rounded-lg p-8 border-[1px] border-[#eaeaea]">
+            <h2 className="text-2xl font-bold mb-4">Arrival Loggin</h2>
+            <LogForm
+              data={logs}
+              type={"arrival"}
+              onSubmit={handleAddLog}
+            ></LogForm>
+          </div>
+        </div>
         <div className={styles.card} style={{ margin: 16, width: "100%" }}>
           <h2>Flight Logs</h2>
           <LogCard style={{ width: "100%" }} data={logs}></LogCard>
-        </div>
-        <div className={styles.card} style={{ margin: 16, width: "100%" }}>
-          <h2>Departure Logging</h2>
-          <LogForm
-            style={{ width: "100%" }}
-            data={logs}
-            type={"departure"}
-            onSubmit={handleAddLog}
-          ></LogForm>
-        </div>
-        <div className={styles.card} style={{ margin: 16, width: "100%" }}>
-          <h2>Arrival Logging</h2>
-          <LogForm
-            style={{ width: "100%" }}
-            data={logs}
-            type={"arrival"}
-            onSubmit={handleAddLog}
-          ></LogForm>
         </div>
         {/* Render boarding pass here */}
         {/* {[].map((_, i) => ( */}
