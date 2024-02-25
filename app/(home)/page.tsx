@@ -3,7 +3,7 @@
 import { useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./Home.module.css";
-import { FlightLogService } from "../(flightlog)/fightlog.service";
+import { FlightLog, FlightLogService } from "../(flightlog)/fightlog.service";
 import LogCard from "../(flightlog)/LogCard";
 import LogForm from "../(flightlog)/LogForm";
 // import BoardingPassCard from "../(boardingpass)/BoardingPassCard";
@@ -11,10 +11,10 @@ import LogForm from "../(flightlog)/LogForm";
 const flightLogService = new FlightLogService();
 
 export default function Home() {
-  const [logs, setLogs] = useState([]);
+  const [logs, setLogs] = useState<FlightLog[]>([]);
 
   const handleAddLog = useCallback(
-    (log) => {
+    (log: FlightLog) => {
       logs.push(log);
       setLogs(logs);
     },
@@ -24,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     const fetch = async () => {
       const data = await flightLogService.getLogs();
-      setLogs(data);
+      setLogs(data as FlightLog[]);
     };
 
     fetch();
