@@ -17,9 +17,10 @@ function LogForm(props: any) {
   }, [formData, type, onSubmit]);
 
   const handleChange = useCallback(({ target }: any) => {
+    let value = target.id == 'timestamp' ? Number.parseInt(target.value) : target.value
     setFormData((prev) => ({
       ...prev,
-      [target.id]: target.value,
+      [target.id]: value,
     }));
   }, []);
 
