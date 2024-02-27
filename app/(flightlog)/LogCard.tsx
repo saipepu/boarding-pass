@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import LogItem from "./LogItem";
-import { FlightLog } from "./fightlog.service";
+import { FlightLog } from "../(services)/fightlog.service";
 
 interface LogCardProps {
   data: FlightLog[]
