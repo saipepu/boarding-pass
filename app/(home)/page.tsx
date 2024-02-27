@@ -3,9 +3,12 @@
 import { useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./Home.module.css";
-import { FlightLog, FlightLogService } from "../(flightlog)/fightlog.service";
+import { FlightLog, FlightLogService } from "../(services)/fightlog.service";
 import LogCard from "../(flightlog)/LogCard";
 import LogForm from "../(flightlog)/LogForm";
+import BoardingPassCard from "../(boardingpass)/BoardingPassCard";
+import { BoardingPass, getBoardingPasses } from "../(services)/boarding-pass.service";
+import { calculateAverageTimeForEachRoute } from "../(services)/average-travel-time.service";
 // import BoardingPassCard from "../(boardingpass)/BoardingPassCard";
 
 const flightLogService = new FlightLogService();
@@ -13,7 +16,9 @@ const flightLogService = new FlightLogService();
 export default function Home() {
 
   const [logs, setLogs] = useState<FlightLog[]>([]);
+  const [bPass, setbPass] = useState<BoardingPass[]>([])
 
+  // add log
   const handleAddLog = useCallback(
     (log: FlightLog) => {
       const existed = logs.filter((item: FlightLog) => item.passengerName == log.passengerName)
@@ -38,6 +43,7 @@ export default function Home() {
     [logs]
   );
 
+  // get logs
   useEffect(() => {
     const fetch = async () => {
       const data = await flightLogService.getLogs();
@@ -46,6 +52,11 @@ export default function Home() {
 
     fetch();
   }, []);
+
+  // getboardingpass
+  useEffect(() => {
+    getBoardingPasses({ logs, setbPass })
+  }, [logs])
 
   return (
     <div className={styles.container}>
@@ -71,14 +82,19 @@ export default function Home() {
             ></LogForm>
           </div>
         </div>
+        <button onClick={() => calculateAverageTimeForEachRoute({ logs })}>Calculate Average Time</button>
         <div className={styles.card} style={{ margin: 16, width: "100%" }}>
           <h2>Flight Logs</h2>
           <LogCard data={logs}></LogCard>
         </div>
         {/* Render boarding pass here */}
-        {/* {[].map((_, i) => ( */}
-        {/*   <BoardingPassCard key={i} /> */}
-        {/* ))} */}
+        <div className="w-full flex flex-col justify-start items-center gap-4">
+          {bPass.map((item, index) => {
+            return (
+              <BoardingPassCard key={index} boardingPass={item} />
+            )
+          })}
+        </div>
       </main>
 
       <footer className={styles.footer}>
